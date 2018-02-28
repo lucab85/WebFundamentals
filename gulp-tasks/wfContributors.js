@@ -58,6 +58,10 @@ function buildIncludes(contributors) {
     contributor.id = key;
     contributor.photo = getPhotoForContributor(key);
     const dest = DEST_INCLUDE.replace('{{key}}', key);
+    if (key.includes('lucaberton')) {
+       gutil.log('  processing ', key, ' renderTemplate', key, ' ',
+       TEMPLATE_INCLUDE, contributor, dest);
+    }
     wfTemplateHelper.renderTemplate(TEMPLATE_INCLUDE, contributor, dest);
   });
   gutil.log('  ', 'Built', gutil.colors.magenta(keys.length + ' files'));
@@ -85,7 +89,13 @@ function buildIndividualPages(contributors) {
   const filesByAuthor = wfHelper.splitByAuthor(files);
   const keys = Object.keys(contributors);
   keys.forEach(function(key) {
+    if (key.includes('lucaberton')) {
+       gutil.log('  processing ', key);
+    }
     if (!(key in filesByAuthor)) {
+      if (key.includes('lucaberton')) {
+         gutil.log('  hit A ', key);
+      }
       return;
     }
     const contributor = contributors[key];
@@ -97,6 +107,9 @@ function buildIndividualPages(contributors) {
     };
     const dest = DEST_ARTICLE_LIST.replace('{{key}}', key);
     wfTemplateHelper.renderTemplate(TEMPLATE_ARTICLE_LIST, context, dest);
+    if (key.includes('lucaberton')) {
+          gutil.log('  hit B ', key);
+    }
   });
 }
 
