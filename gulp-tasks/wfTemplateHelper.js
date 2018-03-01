@@ -46,9 +46,6 @@ function renderTemplate(templateFile, context, outputFile) {
   const result = template(context);
   mkdirp.sync(path.dirname(outputFile));
   fs.writeFileSync(outputFile, result);
-  if (outputFile.includes('lucaberton')) {
-    gutil.log(' ', 'Building file ', outputFile, ' result ', result);
-  }
 }
 
 /**

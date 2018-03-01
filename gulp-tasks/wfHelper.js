@@ -252,9 +252,6 @@ function readMetadataForFile(file) {
     result.authors = [];
     authorList.forEach(function(contributor) {
       const author = wfRegEx.getMatch(wfRegEx.RE_AUTHOR_KEY, contributor);
-      if (author.includes('lucaberton')) {
-         gutil.log('  found  ', author, ' on ', file);
-      }
       result.authors.push(author.trim());
     });
   }
